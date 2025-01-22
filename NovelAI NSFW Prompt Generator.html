@@ -1,0 +1,443 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Prompt Generator</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #341539;
+                background-image: url("https://files.catbox.moe/mcyaak.png");
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+            .container {
+                background-color: #341539;
+                border-radius: 8px;
+                padding: 20px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                max-width: 750px;
+                margin: auto;
+            }
+            h1 {
+                text-align: center;
+                color: whitesmoke;
+            }
+            .field {
+                margin-bottom: 15px;
+                background-color: #341539;
+                font-style: italic;
+            }
+            .field input, .field select {
+                width: 100%;
+                padding: 8px;
+                border: 2px solid black;
+                border-radius: 8px;
+                background-color: #424242;
+                text-decoration: whitesmoke;
+                color: whitesmoke;
+            }
+            .field label {
+                font-weight: bold;
+                color: whitesmoke;
+            }
+            button {
+                width: 100%;
+                padding: 10px;
+                background-color: green;
+                color: whitesmoke;
+                font-size: 16px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #45a049;
+            }
+            .output {
+                margin-top: 20px;
+                text-align: center;
+                color: whitesmoke;
+                background-color:#2f2f2f;
+            }
+            .output a {
+                padding: 10px 20px;
+                background-color: #2f2f2f;
+                color: whitesmoke;
+                text-decoration: none;
+                border-radius: 4px;
+            }
+            .output a:hover {
+                background-color: #341539;
+            }
+        </style>
+    </head>
+    <body>
+
+    <div class="container">
+        <h1>NovelAI Prompt Generator</h1>
+        <form id="promptForm">
+            <!-- Gender Selection -->
+            <div class="field">
+                <label for="gender">Gender:</label>
+                <select id="gender" onchange="updateGender()">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Intersex">Intersex</option>
+                    <option value="Non-Binary">Non-Binary</option>
+                </select>
+            </div>
+
+            <!-- Species Input -->
+            <div class="field">
+                <label for="species">Species:</label>
+                <input type="text" id="species" placeholder="e.g., Human">
+            </div>
+
+            <!-- Penis Size Selection -->
+            <div class="field">
+                <label for="penisSize">Penis Size:</label>
+                <select id="penisSize">
+                    <option value="N/A">N/A</option>
+                    <option value="Tiny">Tiny</option>
+                    <option value="Small">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Big">Big</option>
+                    <option value="Large">Large</option>
+                    <option value="Huge">Huge</option>
+                    <option value="Gigantic">Gigantic</option>
+                    <option value="Enormous">Enormous</option>
+                    <option value="Hyper-Sized">Hyper-Sized</option>
+                </select>
+            </div>
+            <!-- Penis Type Selection -->
+            <div class="field">
+                <label for="penisType">Penis Type:</label>
+                <select id="penisType">
+                    <option value="Standard">Standard</option>
+                    <option value="Knotted">Knotted</option>
+                    <option value="Equine">Equine</option>
+                    <option value="Dragon">Dragon</option>
+                    <option value="Knotted + equine">Knotted + Equine</option>
+                    <option value="Feline">Feline</option>
+                    <option value="Dragon + Knotted">Dragon + Knotted</option>
+                    <option value="Feline + Knotted">Feline + Knotted</option>
+                </select>
+
+            <!-- Breast Size Selection -->
+            <div class="field">
+                <label for="breastSize">Breast Size:</label>
+                <select id="breastSize">
+                    <option value="N/A">N/A</option>
+                    <option value="Flat">Flat</option>
+                    <option value="Tiny">Tiny</option>
+                    <option value="Small">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Big">Big</option>
+                    <option value="Large">Large</option>
+                    <option value="Huge">Huge</option>
+                    <option value="Gigantic">Gigantic</option>
+                    <option value="Enormous">Enormous</option>
+                    <option value="Hyper-Breasts">Hyper-Sized</option>
+                </select>
+            </div>
+
+            <!-- Breast Type Selection-->
+            <div class="field">
+                <label for="breastType">Breast Type:</label>
+                <select id="breastType">
+                    <option value="Standard">Standard</option>
+                    <option value="Quadrupal">Quadrupal</option>
+                    <option value="Crotch-breasts">Crotch-breasts</option>
+                </select>
+            </div>
+
+            <!-- Vagina Details -->
+            <div class="field" id="vaginaDetailsField" style="display: none;">
+                <label for="vaginaDetails">Vagina Details:</label>
+                <select id="vaginaDetails">
+                    <option value="N/A">N/A</option>
+                    <option value="Standard">Standard</option>
+                    <option value="Wet">Wet</option>
+                    <option value="Dripping">Dripping</option>
+                    <option value="Pouring">Pouring</option>
+                    <option value="Fat">Fat</option>
+                    <option value="Bulging">Bulging</option>
+                </select>
+            </div>
+
+            <!-- Testicle Size Selection -->
+            <div class="field">
+                <label for="testicleSize">Testicle Size:</label>
+                <select id="testicleSize">
+                    <option value="N/A">N/A</option>
+                    <option value="Tiny">Tiny</option>
+                    <option value="Small">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Big">Big</option>
+                    <option value="Large">Large</option>
+                    <option value="Huge">Huge</option>
+                    <option value="Gigantic">Gigantic</option>
+                    <option value="Enormous">Enormous</option>
+                    <option value="Hyper-Sized">Hyper-Sized</option>
+                </select>
+            </div>
+
+            <!-- Hair Information Input -->
+            <div class="field">
+                <label for="hairInfo">Hair Choices:</label>
+                <input type="text" id="hairInfo" placeholder="e.g., Cyan with dark blue highlights, long, wavy, curly">
+            </div>
+
+            <!-- Eye Information Input -->
+            <div class="field">
+                <label for="eyeInfo">Eye Choices:</label>
+                <input type="text" id="eyeInfo" placeholder="e.g., Violet, large, heterochromia, eyeliner, glowing">
+            </div>
+
+            <!-- Expression Input -->
+            <div class="field">
+                <label for="expression">Expression:</label>
+                <input type="text" id="expression" placeholder="e.g., Shy with subtle smile">
+            </div>
+
+            <!-- Body Type Selection -->
+            <div class="field">
+                <label for="bodyType">Body Type:</label>
+                <select id="bodyType">
+                    <option value="Slim">Slim</option>
+                    <option value="Slender">Slender</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Curvy">Curvy</option>
+                    <option value="Chubby">Chubby</option>
+                    <option value="Fat">Fat</option>
+                    <option value="Pregnant">Pregnant</option>
+                    <option value="Highly Pregnant">Highly Pregnant</option>
+                </select>
+            </div>
+            
+            <!-- Clothes Presence -->
+            <div class="field">
+            <label for="hasClothes">Has Clothes:</label>
+            <select id="hasClothes" onchange="clothes()">
+                <option value="False">False</option>
+                <option value="True">True</option>
+            </select>
+        </div>
+
+        <!-- Clothing Details -->
+        <div class="field" id="clothesField" style="display: none;">
+                <label for="clothingDescription">Clothing:</label>
+                <input type="text" id="clothingDescription" placeholder="e.g., Black hoodie, booty shorts">
+        </div>
+
+            <!-- Location Input -->
+            <div class="field">
+                <label for="location">Location:</label>
+                <input type="text" id="location" placeholder="e.g., Bedroom at night">
+            </div>
+
+            <!-- Background Input -->
+            <div class="field">
+                <label for="background">Background:</label>
+                <input type="text" id="background" placeholder="e.g., Soft bokeh effect">
+            </div>
+
+            <!-- Extra Details Input -->
+            <div class="field">
+                <label for="extraDetails">Extra Details:</label>
+                <input type="text" id="extraDetails" placeholder="e.g., Amazing quality, soft glow around eyes">
+            </div>
+            <div class="field">
+            <button type="button" id="createTags" onclick="qualityTags()">Add Quality Tags</button>
+            </div>
+
+            <button type="button" onclick="generatePrompt()">Generate Prompt</button>
+        </form>
+
+        <div class="output" id="output" style="display: none;">
+            <h2>Your Generated Prompt:</h2>
+            <button type="button" onclick="copyToClipboard()">Copy to Clipboard</button>
+            <p id="generatedPrompt"></p>
+            <a href="#" id="downloadLink" download="generatedPrompt.txt">Download Prompt</a>
+        </div>
+    </div>
+
+    <script>
+        function updatePenisSize() {
+            const penisSize = document.getElementById('penisSize');
+
+            if (penisSize === "N/A") {
+                penisSize.disabled = true;
+            } else {
+                penisSize.disabled = false;
+                penisSize.value = "penisSize";
+            }
+        }
+        function updatePenisType() {
+            const penisSize = document.getElementById(`penisSize`).value;
+            const penisType = document.getElementById('penisType');
+
+            if (penisSize === "N/A") {
+                penisType.disabled = true;
+            } else {
+                penisType.disabled = false;
+                penisType.value = penisType;
+            }
+        }
+
+        function updateVaginaDetails() {
+            const vaginaDetailsField = document.getElementById('vaginaDetailsField');
+
+            if (vaginaDetailsField === "N/A") {
+                vaginaDetailsField.disabled = True;
+            } else {
+                vaginaDetailsField.disable = false;
+            }
+        }
+        function updateTesticleSize() {
+            const testicleSize = document.getElementById('testicleSize');
+
+            if (testicleSize === "N/A") {
+                testicleSize.disabled = true;
+            } else {
+                testicleSize.disabled = false;
+                testicleSize.value = testicleSize;
+            }
+        }
+        function clothes() {
+            const hasClothes = document.getElementById('hasClothes').value;
+            const clothesField = document.getElementById('clothesField');
+
+            if (hasClothes === "True") {
+                clothesField.style.display = 'block';
+            } else {
+                clothesField.style.display = 'none';
+            }
+        }
+        // Function to check if breastSize is N/A, if N/A no breasts will be added to prompt, otherwise will be.
+        function updateBreastSize() {
+            const breastSize = document.getElementById('breastSize');
+
+            if (breastSize === "N/A") {
+                breastSize.disabled = true;
+            } else {
+                breastSize.disabled = false;
+                breastSize.value = breastSize;
+            }
+        }
+        // Function to check breastSize, if Standard, redundant, otherwise will log in prompt.
+        function updatebreastType() {
+        const breastType = document.getElementById(`breastType`).value;
+        if (breastType === "Standard") {
+            console.log("Standard breasts chosen.");
+            breastType.disabled = true;
+        } else {
+            console.log("Non-standard breasts chosen.")
+            breastType.disabled = false;
+            breastType.value = breastType;
+        }
+        }
+        let FocusTags = ''; // Define it globally
+
+    function qualityTags() {
+        FocusTags = 'Soft bokeh effect, Amazing quality, Sharp focus, Focus on character, Bright lighting, Warm lighting,';
+        console.log("Quality tags added");
+    }
+
+        function generatePrompt() {
+            let prompt = '';
+
+            const gender = document.getElementById('gender').value;
+            const species = document.getElementById('species').value;
+            const penisSize = document.getElementById('penisSize').value;
+            const penisType = document.getElementById('penisType').value;
+            const breastSize = document.getElementById('breastSize').value;
+            const breastType = document.getElementById(`breastType`).value;
+            const vaginaDetails = document.getElementById('vaginaDetails').value;
+            const testicleSize = document.getElementById('testicleSize').value;
+            const hairInfo = document.getElementById('hairInfo').value;
+            const eyeInfo = document.getElementById('eyeInfo').value;
+            const expression = document.getElementById('expression').value;
+            const bodyType = document.getElementById('bodyType').value;
+            const clothingDescription = document.getElementById('clothingDescription').value;
+            const location = document.getElementById('location').value;
+            const background = document.getElementById('background').value;
+            const extraDetails = document.getElementById('extraDetails').value;
+
+            // Generate Gender and Species
+            if (gender === "Intersex") prompt += `Intersex, `;
+            if (gender === "Female") prompt += `1girl, `;
+            if (gender === "Male") prompt += `1boy, `;
+            if (gender === "Non-Binary") prompt += `Non-Binary, `;
+            
+            // Generate species
+            if (species) prompt += `Species:${species}, `;
+
+            // Character will/Not have penis dependency
+            if (penisSize === "N/A") {
+                console.log("No penis size chosen, character will not have a penis.");
+            } else { prompt += `${penisSize} penis, ${penisType} penis, `;
+            }
+            // Dependency to check if Testicles will be added to prompt
+            if (testicleSize === "N/A") {
+                console.log("No testicle size chosen, testicles will not added to prompt.");
+            } else {
+                console.log("Testicles added to prompt, testicle size chosen.");
+                prompt += `${testicleSize} testicles, `;
+            } 
+            // Character will/Not have breasts dependency
+            if (breastSize === "N/A") {
+                console.log("No breast size chosen, character will not have breasts.");
+            } else { 
+                prompt += `${breastSize} breasts, `;
+            }
+            // Vagina options, either none, Normal, or adjective added to prompt.
+            if (vaginaDetails === "N/A") {
+                console.log("No vagina chosen.");
+            } else if (vaginaDetails === "Standard") {
+                prompt += `vagina, `;
+            } else {
+                console.log("Vagina chosen, character will have vagina.");
+                prompt += `${vaginaDetails} vagina, `;
+                }
+            // Generate Appearance
+            if (hairInfo) prompt += `Hair:${hairInfo} hair, `;
+            if (eyeInfo) prompt += `Eyes:${eyeInfo} eyes, `;
+            if (expression) prompt += `${expression} expression, `;
+            if (bodyType) prompt += `Body:${bodyType} body, `;
+
+            // Generate Clothing, Location, Background, Additional details and possible focus tags
+            if (clothingDescription) prompt += `Clothes:${clothingDescription}, `;
+            if (location) prompt += `Location:${location}, `;
+            if (background) prompt += `Background:${background}, `;
+            if (extraDetails) prompt += `${extraDetails}, `;
+            if (FocusTags) prompt += `${FocusTags}, `;
+
+            // Display the generated prompt
+            const output = document.getElementById('output');
+            const generatedPrompt = document.getElementById('generatedPrompt');
+            const downloadLink = document.getElementById('downloadLink');
+
+            prompt = prompt.trim().replace(/,\s*$/, ''); // Remove trailing commas and whitespace
+            generatedPrompt.textContent = prompt;
+            output.style.display = 'block';
+
+            // Prepare the download link
+            const blob = new Blob([prompt], { type: 'text/plain' });
+            downloadLink.href = URL.createObjectURL(blob);
+        }
+        function copyToClipboard() {
+        const generatedPrompt = document.getElementById('generatedPrompt').textContent;
+        navigator.clipboard.writeText(generatedPrompt).then(() => {
+            alert("Prompt copied to clipboard!");
+        }).catch(err => {
+            alert("Failed to copy prompt: " + err);
+        });
+    }
+    </script>
+    </body>
+    </html>
