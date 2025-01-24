@@ -26,6 +26,10 @@
             text-align: center;
             color: whitesmoke;
         }
+        h3 {
+            text-align: right;
+            color:grey;
+        }
         .field {
             margin-bottom: 15px;
             background-color: #341539;
@@ -78,6 +82,7 @@
 <body>
 
 <div class="container">
+    <h3>V0.01</h3>
     <h1>NovelAI Prompt Generator</h1>
     <form id="promptForm">
         <!-- Gender Selection -->
@@ -100,7 +105,7 @@
         <!-- Penis Size Selection -->
         <div class="field">
             <label for="penisSize">Penis Size:</label>
-            <select id="penisSize" onclick="updatePenisType()">
+            <select id="penisSize" onchange="updatePenisSize()">
                 <option value="N/A">N/A</option>
                 <option value="Tiny">Tiny</option>
                 <option value="Small">Small</option>
@@ -109,30 +114,29 @@
                 <option value="Large">Large</option>
                 <option value="Huge">Huge</option>
                 <option value="Gigantic">Gigantic</option>
-                <option value="Enormous">Enormous</option>
                 <option value="Hyper-Sized">Hyper-Sized</option>
             </select>
         </div>
         
         <!-- Penis Type Selection -->
-        <div class="field">
+        <div class="field" id="penisTypeField"  style="display: none;">
             <label for="penisType">Penis Type:</label>
-            <select id="penisType">
+            <select id="penisType" onchange="updatePenisType()">
                 <option value="Standard">Standard</option>
                 <option value="Knotted">Knotted</option>
                 <option value="Equine">Equine</option>
-                <option value="Draconic">Draconic</option>
+                <option value="Ridged knotted">Draconic</option>
                 <option value="Knotted + equine">Knotted + Equine</option>
                 <option value="Feline">Feline</option>
-                <option value="Draconic + Knotted">Draconic + Knotted</option>
+                <option value="Ridged + Knotted">Draconic + Knotted</option>
                 <option value="Feline + Knotted">Feline + Knotted</option>
             </select>
         </div>   
 
         <!-- Breast Size Selection -->
-        <div class="field">
+        <div class="field" id="breastSizeField">
             <label for="breastSize">Breast Size:</label>
-            <select id="breastSize" onclick="updateBreastSize()">
+            <select id="breastSize" onchange="updateBreastSize()">
                 <option value="N/A">N/A</option>
                 <option value="Flat">Flat</option>
                 <option value="Tiny">Tiny</option>
@@ -142,13 +146,12 @@
                 <option value="Large">Large</option>
                 <option value="Huge">Huge</option>
                 <option value="Gigantic">Gigantic</option>
-                <option value="Enormous">Enormous</option>
                 <option value="Hyper-Breasts">Hyper-Sized</option>
             </select>
         </div>
 
         <!-- Breast Type Selection-->
-        <div class="field" style="display: none;">
+        <div class="field" id="breastTypeField" style="display: none;">
             <label for="breastType">Breast Type:</label>
             <select id="breastType">
                 <option value="Standard">Standard</option>
@@ -160,23 +163,26 @@
         </div>
 
        <!-- Nipple Type/Size Selection-->
-        <div class="field">
+        <div class="field" id="nippleTypeField">
             <label for="nippleType">Nipple Type/Size:</label>
-            <select id="nippleType">
+            <select id="nippleType" onchange="updateNippleType()">
                 <option value="N/A">N/A</option>
                 <option value="Standard">Standard</option>
-                <option value="Puffy">Puffy</option>
-                <option value="Inverted">Inverted</option>
-                <option value="Large">Large</option>
-                <option value="Hyper-Sized">Hyper-Sized</option>
                 <option value="Pierced">Pierced</option>
-                <option value="Puffy + Pierced">Puffy + Pierced</option>
-                <option value="Inverted + Pierced">Inverted + Pierced</option>
+                <option value="Puffy">Puffy</option>
+                <option value="Puffy and pierced">Puffy + Pierced</option>
+                <option value="Inverted">Inverted</option>
+                <option value="Inverted and pierced">Inverted + Pierced</option>
+                <option value="Large">Large</option>
+                <option value="Large and puffy">Large + Puffy</option>
+                <option value="Large and pierced">Large + Pierced</option>
+                <option value="Hyper-Sized">Hyper-Sized</option>
+                <option value="Hyper-sized and pierced">Hyper-sized + Pierced</option>
                 </select>
         </div>
 
         <!-- Vagina Details -->
-        <div class="field">
+        <div class="field" onchange="updateVaginaDetails()">
             <label for="vaginaDetails">Vagina Details:</label>
             <select id="vaginaDetails">
                 <option value="N/A">N/A</option>
@@ -184,8 +190,7 @@
                 <option value="Wet">Wet</option>
                 <option value="Dripping">Dripping</option>
                 <option value="Pouring">Pouring</option>
-                <option value="Fat">Fat</option>
-                <option value="Bulging">Bulging</option>
+                <option value="Bulging lips">Bulging Lips</option>
             </select>
         </div>
 
@@ -201,7 +206,6 @@
                 <option value="Large">Large</option>
                 <option value="Huge">Huge</option>
                 <option value="Gigantic">Gigantic</option>
-                <option value="Enormous">Enormous</option>
                 <option value="Hyper-Sized">Hyper-Sized</option>
             </select>
         </div>
@@ -233,23 +237,13 @@
                 <option value="Medium">Medium</option>
                 <option value="Curvy">Curvy</option>
                 <option value="Chubby">Chubby</option>
-                <option value="Fat">Fat</option>
                 <option value="Pregnant">Pregnant</option>
                 <option value="Highly Pregnant">Highly Pregnant</option>
             </select>
         </div>
         
-        <!-- Clothes Presence -->
-        <div class="field">
-        <label for="hasClothes">Has Clothes:</label>
-        <select id="hasClothes" onchange="clothes()">
-            <option value="False">False</option>
-            <option value="True">True</option>
-        </select>
-    </div>
-
     <!-- Clothing Details -->
-    <div class="field" id="clothesField" style="display: none;">
+    <div class="field" id="clothesField" oninput="clothes()">
             <label for="clothingDescription">Clothing:</label>
             <input type="text" id="clothingDescription" placeholder="e.g., Black hoodie, booty shorts">
     </div>
@@ -288,85 +282,88 @@
 
 <script>
     function updatePenisSize() {
-        const penisSize = document.getElementById('penisSize');
+        let penisSize = document.getElementById('penisSize').value;
+        let penisTypeField = document.getElementById('penisTypeField');
 
         if (penisSize === "N/A") {
-            penisSize.disabled = true;
+            penisSize = penisSize;
+            penisTypeField.style.display = "none";
+            penisType = "Standard";
         } else {
-            penisSize.disabled = false;
-            penisSize.value = "penisSize";
+            penisTypeField.style.display = "block";
+            penisSize = penisSize;
         }
     }
     function updatePenisType() {
-        const penisSize = document.getElementById(`penisSize`).value;
-        const penisType = document.getElementById('penisType');
+        let penisType = document.getElementById('penisType');
 
-        if (penisSize === "N/A") {
-            penisType.disabled = true;
+        if (penisType === "Standard") {
+            penisType = penisType;
         } else {
-            penisType.disabled = false;
+            penisType = penisType;
         }
     }
      // Define vagina details etc...
     function updateVaginaDetails() {
-        const vaginaDetails = document.getElementById('vaginaDetails');
+        let vaginaDetails = document.getElementById('vaginaDetails');
 
         if (vaginaDetails === "N/A") {
-            vaginaDetails.disabled = True;
+            console.log('No vagina chosen Function callback')
         } else {
-            vaginaDetails.disable = false;
+            vaginaDetails = vaginaDetails;
         }
     }
     // Define nippleType etc...
-    function updateNippletType() {
+    function updateNippleType() {
         const nippleType = document.getElementById('nippleType');
 
         if (nippleType === "N/A") {
-            nippleType.disabled = true;
+            nippleType = nippleType;
         } else {
-            nippleType.disable = false;
+            nippleType = nippleType;
         }
     }
     function updateTesticleSize() {
-        const testicleSize = document.getElementById('testicleSize');
+        const testicleSize = document.getElementById('testicleSize').value;
+        const testicleType = document.getElementById('testicleSize')
 
         if (testicleSize === "N/A") {
-            testicleSize.style.display = 'None'
+            testicleType.style.display = 'None'
         } else {
-            testicleSize.disabled = false;
-            testicleSize.value = testicleSize;
-            testicleSize.style.display = 'field';
+            testicleType.style.display = 'block';
         }
     }
+    let clothingUsed = '';
+    let clothesChosen = 'false';
     function clothes() {
-        const hasClothes = document.getElementById('hasClothes').value;
+        console.log('clothes function runs')
         const clothesField = document.getElementById('clothesField');
-
-        if (hasClothes === "True") {
-            clothesField.style.display = 'block';
-        } else {
-            clothesField.style.display = 'none';
-        }
-    }
+        let clothingUsed = document.getElementById('clothingDescription');
+     clothesChosen = 'true';
+     clothingUsed = 'clothingDescription';
+     }
+    
     // Function to check if breastSize is N/A, if N/A no breasts will be added to prompt, otherwise will be.
     function updateBreastSize() {
-        const breastSize = document.getElementById('breastSize').value;
+        let breastSize = document.getElementById('breastSize').value;
+        let breastTypeField = document.getElementById('breastTypeField');
 
          if (breastSize === "N/A") {
+            console.log('No breast size chosen, breast type and nipple type hidden.')
+            breastTypeField.style.display = "none";
          } else {
+            breastTypeField.style.display = "block";
     }
     }
     // Function to check breastSize, if Standard, redundant, otherwise will log in prompt.
     function updatebreastType() {
-    const breastType = document.getElementById(`breastType`);
-    const breastSize = document.getElemenyById('breastSize').value;
+    let breastType = document.getElementById(`breastType`);
+    let breastSize = document.getElemenyById('breastSize').value;
 
-     if (breastSize === "N/A") {
-        breastType = 'N/A';
-        nippleType = 'N/A';
+     if (breastType === "N/A") {
+        breastType = 'Standard';
     } else {
         breastType = breastType;
-        nippleType = nippleType;
     }
     }
     let FocusTags = ''; // Define it globally
@@ -392,7 +389,6 @@ function qualityTags() {
         const eyeInfo = document.getElementById('eyeInfo').value;
         const expression = document.getElementById('expression').value;
         const bodyType = document.getElementById('bodyType').value;
-        const clothingDescription = document.getElementById('clothingDescription').value;
         const location = document.getElementById('location').value;
         const background = document.getElementById('background').value;
         const extraDetails = document.getElementById('extraDetails').value;
@@ -406,17 +402,31 @@ function qualityTags() {
         // Generate species
         if (species) prompt += `Species:${species}, `;
 
+        // Vagina options, either none, Normal, or adjective added to prompt.
+        if (vaginaDetails === "N/A") {
+            console.log("No vagina chosen.");
+        } else if (vaginaDetails === "Standard") {
+            prompt += `Vagina, `;
+        } else {
+            console.log("Vagina chosen, character will have vagina.");
+            prompt += `${vaginaDetails} vagina, `;
+        }
+        
+        // Penis Type dependency, Standard shouldn't justify being prompted to the finished prompt.
+        if (penisType === "Standard") {
+        
+        //Standard penis size chosen, type won't be printed to prompt.
+        } else if (penisSize === "N/A") {
+          console.log('No penisSize, failsafe will remove penis type from prompt.')
+        } else {
+            prompt += ` ${penisType} penis, `;
+        }
+        
         // Character will/Not have penis dependency
         if (penisSize === "N/A") {
             console.log("No penis size chosen, character will not have a penis."); 
-        } else { prompt += `${penisSize} penis,`;
+        } else { prompt += ` ${penisSize} penis,`;
             console.log("Penis size chosen, character will have a penis.");
-        }
-        // Penis Type dependency, Standard shouldn't justify being prompted to the finished prompt.
-        if (penisType === "Standard") {
-            //Standard penis size chosen, type won't be printed to prompt.
-        } else {
-            prompt += ` ${penisType} penis, `;
         }
         // Dependency to check if Testicles will be added to prompt
         if (testicleSize === "N/A") {
@@ -434,28 +444,21 @@ function qualityTags() {
         // Breast type dependency
         if (breastType === "Standard") {
             console.log("Standard breast type chosen for character and will not be mentioned in the prompt.");
+        } else if (breastSize === "N/A") {
+            console.log("No breast size chosen, failsafe will remove type from prompt.")
         } else {
              prompt += ` ${breastType} breasts, `;
             }
         // Nipple type dependency
         if (nippleType === "N/A") {
-            console.log("No nipple type chosen, won't be added to prompt.");
-        } else if (nippleType === "Standard") {
+            console.log("No nipple type chosen, won't be added to prompt.");   
+         } else if (nippleType === "Standard") {
             prompt += ` Nipples, `;
             console.log("nipple type chosen, ")
         } else {
             prompt += ` ${nippleType} nipples, `;
         }
     
-        // Vagina options, either none, Normal, or adjective added to prompt.
-        if (vaginaDetails === "N/A") {
-            console.log("No vagina chosen.");
-        } else if (vaginaDetails === "Standard") {
-            prompt += `Vagina, `;
-        } else {
-            console.log("Vagina chosen, character will have vagina.");
-            prompt += `${vaginaDetails} vagina, `;
-            }
         // Generate Appearance
         if (hairInfo) prompt += ` Hair:${hairInfo} hair, `;
         if (eyeInfo) prompt += ` Eyes:${eyeInfo} eyes, `;
@@ -463,7 +466,10 @@ function qualityTags() {
         if (bodyType) prompt += ` Body:${bodyType} body, `;
 
         // Generate Clothing, Location, Background, Additional details and possible focus tags
-        if (clothingDescription) prompt += ` Clothes:${clothingDescription}, `;
+        if (clothesChosen === 'false') {
+            console.log('No clothes chosen, character will default to nude.');
+        } else {
+               } prompt += ` ${clothingUsed}, `;
         if (location) prompt += ` Location:${location}, `;
         if (background) prompt += ` Background:${background}, `;
         if (extraDetails) prompt += ` ${extraDetails}, `;
