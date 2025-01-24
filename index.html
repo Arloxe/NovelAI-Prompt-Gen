@@ -389,6 +389,7 @@ function qualityTags() {
         const eyeInfo = document.getElementById('eyeInfo').value;
         const expression = document.getElementById('expression').value;
         const bodyType = document.getElementById('bodyType').value;
+        const clothingDescription = document.getElementById('clothingDescription').value;
         const location = document.getElementById('location').value;
         const background = document.getElementById('background').value;
         const extraDetails = document.getElementById('extraDetails').value;
@@ -466,10 +467,7 @@ function qualityTags() {
         if (bodyType) prompt += ` Body:${bodyType} body, `;
 
         // Generate Clothing, Location, Background, Additional details and possible focus tags
-        if (clothesChosen === 'false') {
-            console.log('No clothes chosen, character will default to nude.');
-        } else {
-               } prompt += ` ${clothingUsed}, `;
+        if (clothingDescription) prompt += ` ${clothingDescription}, `;
         if (location) prompt += ` Location:${location}, `;
         if (background) prompt += ` Background:${background}, `;
         if (extraDetails) prompt += ` ${extraDetails}, `;
