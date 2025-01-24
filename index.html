@@ -121,10 +121,10 @@
                 <option value="Standard">Standard</option>
                 <option value="Knotted">Knotted</option>
                 <option value="Equine">Equine</option>
-                <option value="Dragon">Dragon</option>
+                <option value="Draconic">Dragon</option>
                 <option value="Knotted + equine">Knotted + Equine</option>
                 <option value="Feline">Feline</option>
-                <option value="Dragon + Knotted">Dragon + Knotted</option>
+                <option value="Draconic + Knotted">Dragon + Knotted</option>
                 <option value="Feline + Knotted">Feline + Knotted</option>
             </select>
         </div>   
@@ -416,35 +416,35 @@ function qualityTags() {
         if (penisType === "Standard") {
             //Standard penis size chosen, type won't be printed to prompt.
         } else {
-            prompt += `${penisType} penis, `;
+            prompt += ` ${penisType} penis, `;
         }
         // Dependency to check if Testicles will be added to prompt
         if (testicleSize === "N/A") {
             console.log("No testicle size chosen, testicles will not added to prompt.");
         } else {
             console.log("Testicles added to prompt, testicle size chosen.");
-            prompt += `${testicleSize} testicles, `;
+            prompt += ` ${testicleSize} testicles, `;
         } 
         // Character will/Not have breasts dependency
         if (breastSize === "N/A") {
             console.log("No breast size chosen, character will not have breasts.");
         } else { 
-            prompt += `${breastSize} breasts, `;
+            prompt += ` ${breastSize} breasts, `;
         }
         // Breast type dependency
         if (breastType === "Standard") {
             console.log("Standard breast type chosen for character and will not be mentioned in the prompt.");
         } else {
-             prompt += `${breastType} breasts, `;
+             prompt += ` ${breastType} breasts, `;
             }
         // Nipple type dependency
         if (nippleType === "N/A") {
             console.log("No nipple type chosen, won't be added to prompt.");
         } else if (nippleType === "Standard") {
-            prompt += `Nipples, `;
+            prompt += ` Nipples, `;
             console.log("nipple type chosen, ")
         } else {
-            prompt += `${nippleType} nipples, `;
+            prompt += ` ${nippleType} nipples, `;
         }
     
         // Vagina options, either none, Normal, or adjective added to prompt.
@@ -457,17 +457,17 @@ function qualityTags() {
             prompt += `${vaginaDetails} vagina, `;
             }
         // Generate Appearance
-        if (hairInfo) prompt += `Hair:${hairInfo} hair, `;
-        if (eyeInfo) prompt += `Eyes:${eyeInfo} eyes, `;
-        if (expression) prompt += `${expression} expression, `;
-        if (bodyType) prompt += `Body:${bodyType} body, `;
+        if (hairInfo) prompt += ` Hair:${hairInfo} hair, `;
+        if (eyeInfo) prompt += ` Eyes:${eyeInfo} eyes, `;
+        if (expression) prompt += ` ${expression} expression, `;
+        if (bodyType) prompt += ` Body:${bodyType} body, `;
 
         // Generate Clothing, Location, Background, Additional details and possible focus tags
-        if (clothingDescription) prompt += `Clothes:${clothingDescription}, `;
-        if (location) prompt += `Location:${location}, `;
-        if (background) prompt += `Background:${background}, `;
-        if (extraDetails) prompt += `${extraDetails}, `;
-        if (FocusTags) prompt += `${FocusTags}, `;
+        if (clothingDescription) prompt += ` Clothes:${clothingDescription}, `;
+        if (location) prompt += ` Location:${location}, `;
+        if (background) prompt += ` Background:${background}, `;
+        if (extraDetails) prompt += ` ${extraDetails}, `;
+        if (FocusTags) prompt += ` ${FocusTags}, `;
 
         // Display the generated prompt
         const output = document.getElementById('output');
