@@ -82,7 +82,7 @@
 <body>
 
 <div class="container">
-    <h3>V0.01</h3>
+    <h3>V0.02</h3>
     <h1>NovelAI Prompt Generator</h1>
     <form id="promptForm">
         <!-- Gender Selection -->
@@ -221,6 +221,11 @@
             <label for="eyeInfo">Eye Choices:</label>
             <input type="text" id="eyeInfo" placeholder="e.g., Violet, large, heterochromia, eyeliner, glowing">
         </div>
+        <!-- Character Age Input-->
+         <div class="field">
+            <label for="charAge">Character Age:</label>
+            <input type="text" id="charAge" onchange="updateCharacterAge()" placeholder="eg., 25 years old, 30s, 20s...">
+         </div>
 
         <!-- Expression Input -->
         <div class="field">
@@ -284,14 +289,15 @@
     function updatePenisSize() {
         let penisSize = document.getElementById('penisSize').value;
         let penisTypeField = document.getElementById('penisTypeField');
+        console.log("Function updatePenisSize runs");
 
         if (penisSize === "N/A") {
-            penisSize = penisSize;
+            console.log("penisType hidden.");
             penisTypeField.style.display = "none";
             penisType = "Standard";
         } else {
+            console.log("penistype Vis");
             penisTypeField.style.display = "block";
-            penisSize = penisSize;
         }
     }
     function updatePenisType() {
@@ -304,13 +310,19 @@
         }
     }
      // Define vagina details etc...
+     vaginaChoiceCheck = "false";
     function updateVaginaDetails() {
-        let vaginaDetails = document.getElementById('vaginaDetails');
+        let vaginaDetails = document.getElementById('vaginaDetails').value;
 
         if (vaginaDetails === "N/A") {
             console.log('No vagina chosen Function callback')
+            vaginaChoiceCheck = "false";
+        } else if (vaginaDetails === "Standard") {
+            console.log('Vagina chosen === Standard')
+            vaginaChoiceCheck = "Standard";
         } else {
-            vaginaDetails = vaginaDetails;
+            vaginaChoiceCheck = "true";
+            console.log('Vagina chosen is neither N/A or Standard')
         }
     }
     // Define nippleType etc...
@@ -366,8 +378,20 @@
         breastType = breastType;
     }
     }
+    // Defining character age
+    let charAgeCheck = "false";
+    function updateCharacterAge() {
+        const charAge = document.getElementById('charAge').value;
+        if (charAge === "") {
+            console.log('No age chosen, character will not have an age in the prompt');
+            charAgeCheck ="false";
+        } else {
+        console.log("charAgeCheck runs");
+        charAgeCheck = "true"; 
+        }
+    }
     let FocusTags = ''; // Define it globally
-
+    let focusTagsCheck = "false";
 function qualityTags() {
     FocusTags = 'Soft bokeh effect, Amazing quality, Sharp focus, Focus on character, Bright lighting, Warm lighting,';
     console.log("Quality tags added");
@@ -387,6 +411,7 @@ function qualityTags() {
         const testicleSize = document.getElementById('testicleSize').value;
         const hairInfo = document.getElementById('hairInfo').value;
         const eyeInfo = document.getElementById('eyeInfo').value;
+        const charAge = document.getElementById('charAge').value;
         const expression = document.getElementById('expression').value;
         const bodyType = document.getElementById('bodyType').value;
         const clothingDescription = document.getElementById('clothingDescription').value;
@@ -404,13 +429,15 @@ function qualityTags() {
         if (species) prompt += `Species:${species}, `;
 
         // Vagina options, either none, Normal, or adjective added to prompt.
-        if (vaginaDetails === "N/A") {
+        if (vaginaChoiceCheck === "false") {
             console.log("No vagina chosen.");
-        } else if (vaginaDetails === "Standard") {
+        } else if (vaginaChoiceCheck === "Standard") {
             prompt += `Vagina, `;
-        } else {
+        } else if (vaginaChoiceCheck === "true") {
             console.log("Vagina chosen, character will have vagina.");
             prompt += `${vaginaDetails} vagina, `;
+        } else {
+            console.log("Failsafe, vagina changed, error in code.")
         }
         
         // Penis Type dependency, Standard shouldn't justify being prompted to the finished prompt.
@@ -463,6 +490,27 @@ function qualityTags() {
         // Generate Appearance
         if (hairInfo) prompt += ` Hair:${hairInfo} hair, `;
         if (eyeInfo) prompt += ` Eyes:${eyeInfo} eyes, `;
+        if (charAge === "20s") {
+            prompt += `Age:${charAge}, `;
+        } else if (charAge === "30s") {
+            prompt += `Age:${charAge}, `;
+        } else if (charAge === "40s") {
+            prompt += `Age:${charAge}, `;
+        } else if (charAge === "50s") {
+            prompt += `Age:${charAge}, `;
+        } else if (charAge === "60s") {
+            prompt += `Age:${charAge}, `;
+        } else if (charAge === "70s") {
+            prompt += `Age:${charAge}, `;
+        } else if (charAge === "80s") {
+            prompt += `Age:${charAge}, `;
+        } else if (charAge === "90s") {
+            prompt += `Age:${charAge}, `
+        } else if (charAgeCheck === "true") {
+            prompt += `${charAge} years old, `
+        } else {
+            console.log("No age chosen, age will not print into prompt.")
+        }
         if (expression) prompt += ` ${expression} expression, `;
         if (bodyType) prompt += ` Body:${bodyType} body, `;
 
