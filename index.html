@@ -10,7 +10,6 @@
             margin: 0;
             padding: 20px;
             background-color: #341539;
-            background-image: url("https://files.catbox.moe/mcyaak.png");
             background-size: contain;
             background-repeat: no-repeat;
         }
@@ -18,8 +17,15 @@
             background-color: #341539;
             border-radius: 8px;
             padding: 20px;
+            background-image: url("https://files.catbox.moe/mcyaak.png");
+            background-size: contain;
+            background-position: center;
+            margin: 0 auto 15px auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 750px;
+            max-width: 100vw 100vh;
             margin: auto;
         }
         h1 {
@@ -31,15 +37,23 @@
             color:grey;
         }
         .field {
-            margin-bottom: 15px;
+            margin: 0 auto 20px auto;
             background-color: #341539;
             font-style: italic;
+            font-size: 16px;
+            border-radius: 12px;
+            max-width: 750px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align:center;
         }
         .field input, .field select {
-            width: 100%;
+            width:100%;
+            margin: 0 auto 10px auto;
             padding: 8px;
-            border: 2px solid black;
-            border-radius: 8px;
+            border-radius: 12px;
             background-color: #424242;
             text-decoration: whitesmoke;
             color: whitesmoke;
@@ -49,18 +63,23 @@
             color: whitesmoke;
         }
         button {
-            width: 100%;
+            width: 400px;
             padding: 10px;
             background-color: green;
             color: whitesmoke;
+            border-radius: 12px;
             font-size: 16px;
-            border: none;
-            border-radius: 4px;
             cursor: pointer;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #53c259;
         }
+        .button-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            border-radius: 12px;
+         }
         .output {
             margin-top: 20px;
             text-align: center;
@@ -82,208 +101,213 @@
 <body>
 
 <div class="container">
-    <h3>V0.02</h3>
-    <h1>NovelAI Prompt Generator</h1>
     <form id="promptForm">
-        <!-- Gender Selection -->
-        <div class="field">
-            <label for="gender">Gender:</label>
+
+    <h3>V0.03</h3>
+
+    <h1>NovelAI Prompt Generator</h1>
+
+    <!-- Gender Selection -->
+    <div class="field">
+            <label for="gender">Gender</label>
             <select id="gender" onchange="updateGender()">
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Intersex">Intersex</option>
                 <option value="Non-Binary">Non-Binary</option>
             </select>
-        </div>
+    </div>
 
-        <!-- Species Input -->
-        <div class="field">
-            <label for="species">Species:</label>
+    <!-- Species Input -->
+    <div class="field">
+            <label for="species">Species</label>
             <input type="text" id="species" placeholder="e.g., Human">
-        </div>
+    </div>
 
-        <!-- Penis Size Selection -->
+    <!-- Hair Information Input -->
         <div class="field">
-            <label for="penisSize">Penis Size:</label>
-            <select id="penisSize" onchange="updatePenisSize()">
-                <option value="N/A">N/A</option>
-                <option value="Tiny">Tiny</option>
-                <option value="Small">Small</option>
-                <option value="Medium">Medium</option>
-                <option value="Big">Big</option>
-                <option value="Large">Large</option>
-                <option value="Huge">Huge</option>
-                <option value="Gigantic">Gigantic</option>
-                <option value="Hyper-Sized">Hyper-Sized</option>
-            </select>
-        </div>
-        
-        <!-- Penis Type Selection -->
-        <div class="field" id="penisTypeField"  style="display: none;">
-            <label for="penisType">Penis Type:</label>
-            <select id="penisType" onchange="updatePenisType()">
-                <option value="Standard">Standard</option>
-                <option value="Knotted">Knotted</option>
-                <option value="Equine">Equine</option>
-                <option value="Ridged knotted">Draconic</option>
-                <option value="Knotted + equine">Knotted + Equine</option>
-                <option value="Feline">Feline</option>
-                <option value="Ridged + Knotted">Draconic + Knotted</option>
-                <option value="Feline + Knotted">Feline + Knotted</option>
-            </select>
-        </div>   
+            <label for="hairInfo">Hair Choices</label>
+            <input type="text" id="hairInfo" placeholder="e.g., cyan hair with dark blue highlights, long hair, wavy hair, curly hair">
+    </div>
 
-        <!-- Breast Size Selection -->
-        <div class="field" id="breastSizeField">
-            <label for="breastSize">Breast Size:</label>
-            <select id="breastSize" onchange="updateBreastSize()">
-                <option value="N/A">N/A</option>
-                <option value="Flat">Flat</option>
-                <option value="Tiny">Tiny</option>
-                <option value="Small">Small</option>
-                <option value="Medium">Medium</option>
-                <option value="Big">Big</option>
-                <option value="Large">Large</option>
-                <option value="Huge">Huge</option>
-                <option value="Gigantic">Gigantic</option>
-                <option value="Hyper-Breasts">Hyper-Sized</option>
-            </select>
-        </div>
+    <!-- Eye Information Input -->
+    <div class="field">
+            <label for="eyeInfo">Eye Choices</label>
+            <input type="text" id="eyeInfo" placeholder="e.g., violet eyes, large eyes, heterochromia, eyeliner, glowing">
+    </div>
 
-        <!-- Breast Type Selection-->
-        <div class="field" id="breastTypeField" style="display: none;">
-            <label for="breastType">Breast Type:</label>
-            <select id="breastType">
-                <option value="Standard">Standard</option>
-                <option value="Perky">Perky</opttion>
-                <option value="Saggy">Saggy</option>
-                <option value="Quadrupal">Quadrupal</option>
-                <option value="Crotch">Crotch-breasts</option>
-            </select>
-        </div>
-
-       <!-- Nipple Type/Size Selection-->
-        <div class="field" id="nippleTypeField">
-            <label for="nippleType">Nipple Type/Size:</label>
-            <select id="nippleType" onchange="updateNippleType()">
-                <option value="N/A">N/A</option>
-                <option value="Standard">Standard</option>
-                <option value="Pierced">Pierced</option>
-                <option value="Puffy">Puffy</option>
-                <option value="Puffy and pierced">Puffy + Pierced</option>
-                <option value="Inverted">Inverted</option>
-                <option value="Inverted and pierced">Inverted + Pierced</option>
-                <option value="Large">Large</option>
-                <option value="Large and puffy">Large + Puffy</option>
-                <option value="Large and pierced">Large + Pierced</option>
-                <option value="Hyper-Sized">Hyper-Sized</option>
-                <option value="Hyper-sized and pierced">Hyper-sized + Pierced</option>
-                </select>
-        </div>
-
-        <!-- Vagina Details -->
-        <div class="field" onchange="updateVaginaDetails()">
-            <label for="vaginaDetails">Vagina Details:</label>
-            <select id="vaginaDetails">
-                <option value="N/A">N/A</option>
-                <option value="Standard">Standard</option>
-                <option value="Wet">Wet</option>
-                <option value="Dripping">Dripping</option>
-                <option value="Pouring">Pouring</option>
-                <option value="Bulging lips">Bulging Lips</option>
-            </select>
-        </div>
-
-        <!-- Testicle Size Selection -->
-        <div class="field">
-            <label for="testicleSize">Testicle Size:</label>
-            <select id="testicleSize">
-                <option value="N/A">N/A</option>
-                <option value="Tiny">Tiny</option>
-                <option value="Small">Small</option>
-                <option value="Medium">Medium</option>
-                <option value="Big">Big</option>
-                <option value="Large">Large</option>
-                <option value="Huge">Huge</option>
-                <option value="Gigantic">Gigantic</option>
-                <option value="Hyper-Sized">Hyper-Sized</option>
-            </select>
-        </div>
-
-        <!-- Hair Information Input -->
-        <div class="field">
-            <label for="hairInfo">Hair Choices:</label>
-            <input type="text" id="hairInfo" placeholder="e.g., Cyan with dark blue highlights, long, wavy, curly">
-        </div>
-
-        <!-- Eye Information Input -->
-        <div class="field">
-            <label for="eyeInfo">Eye Choices:</label>
-            <input type="text" id="eyeInfo" placeholder="e.g., Violet, large, heterochromia, eyeliner, glowing">
-        </div>
-        <!-- Character Age Input-->
-         <div class="field">
-            <label for="charAge">Character Age:</label>
+    <!-- Character Age Input-->
+    <div class="field">
+            <label for="charAge">Character Age</label>
             <input type="text" id="charAge" onchange="updateCharacterAge()" placeholder="eg., 25 years old, 30s, 20s...">
-         </div>
+    </div>
 
-        <!-- Expression Input -->
-        <div class="field">
-            <label for="expression">Expression:</label>
+    <!-- Expression Input -->
+    <div class="field">
+            <label for="expression">Expression</label>
             <input type="text" id="expression" placeholder="e.g., Shy with subtle smile">
-        </div>
-
-        <!-- Body Type Selection -->
-        <div class="field">
-            <label for="bodyType">Body Type:</label>
-            <select id="bodyType">
-                <option value="Slim">Slim</option>
-                <option value="Slender">Slender</option>
-                <option value="Medium">Medium</option>
-                <option value="Curvy">Curvy</option>
-                <option value="Chubby">Chubby</option>
-                <option value="Pregnant">Pregnant</option>
-                <option value="Highly Pregnant">Highly Pregnant</option>
-            </select>
-        </div>
+    </div>
         
     <!-- Clothing Details -->
     <div class="field" id="clothesField" oninput="clothes()">
-            <label for="clothingDescription">Clothing:</label>
+            <label for="clothingDescription">Clothing</label>
             <input type="text" id="clothingDescription" placeholder="e.g., Black hoodie, booty shorts">
     </div>
 
-        <!-- Location Input -->
-        <div class="field">
-            <label for="location">Location:</label>
-            <input type="text" id="location" placeholder="e.g., Bedroom at night">
-        </div>
+    <!-- Breast Size Selection -->
+    <div class="field" id="breastSizeField">
+            <label for="breastSize">Breast Size</label>
+            <select id="breastSize" onchange="updateBreastSize()">
+                <option value="N/A">N/A</option>
+                <option value="flat">Flat</option>
+                <option value="tiny">Tiny</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="big">Big</option>
+                <option value="large">Large</option>
+                <option value="huge">Huge</option>
+                <option value="gigantic">Gigantic</option>
+                <option value="hyper-breasts">Hyper-Sized</option>
+            </select>
+    </div>
 
-        <!-- Background Input -->
-        <div class="field">
-            <label for="background">Background:</label>
-            <input type="text" id="background" placeholder="e.g., Soft bokeh effect">
-        </div>
+    <!-- Breast Type Selection-->
+    <div class="field" id="breastTypeField" style="display: none;">
+            <label for="breastType">Breast Type</label>
+            <select id="breastType">
+                <option value="standard">Standard</option>
+                <option value="perky">Perky</opttion>
+                <option value="saggy">Saggy</option>
+                <option value="quadrupal">Quadrupal</option>
+                <option value="crotch">Crotch-breasts</option>
+            </select>
+    </div>
 
-        <!-- Extra Details Input -->
-        <div class="field">
-            <label for="extraDetails">Extra Details:</label>
-            <input type="text" id="extraDetails" placeholder="e.g., Amazing quality, soft glow around eyes">
-        </div>
-        <div class="field">
+    <!-- Nipple Type/Size Selection-->
+    <div class="field" id="nippleTypeField" style="display: none;">
+            <label for="nippleType">Nipple Type/Size</label>
+            <select id="nippleType">
+                <option value="N/A">N/A</option>
+                <option value="Standard">Standard</option>
+                <option value="pierced">Pierced</option>
+                <option value="puffy">Puffy</option>
+                <option value="inverted">Inverted</option>
+                <option value="large">Large</option>
+                <option value="hyper-sized">Hyper-Sized</option>
+                <option value="puffy and pierced">Puffy + Pierced</option>
+                <option value="large and pierced">Large + Pierced</option>
+                <option value="large and puffy">Large + Puffy</option>
+                <option value="hyper-sized and pierced">Hyper-sized + Pierced</option>
+                </select>
+    </div>
+
+    <!-- Body Type Selection -->
+    <div class="field">
+                <label for="bodyType">Body Type</label>
+                <select id="bodyType">
+                    <option value="Slim">Slim</option>
+                    <option value="Slender">Slender</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Curvy">Curvy</option>
+                    <option value="Chubby">Chubby</option>
+                    <option value="Pregnant">Pregnant</option>
+                    <option value="Highly Pregnant">Highly Pregnant</option>
+                </select>
+    </div>
+
+    <!-- Penis Size Selection -->
+    <div class="field">
+            <label for="penisSize">Penis Size</label>
+            <select id="penisSize" onchange="updatePenisSize()">
+                <option value="N/A">N/A</option>
+                <option value="tiny">Tiny</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="big">Big</option>
+                <option value="large">Large</option>
+                <option value="huge">Huge</option>
+                <option value="gigantic">Gigantic</option>
+                <option value="hyper-sized">Hyper-Sized</option>
+            </select>
+    </div>
+        
+    <!-- Penis Type Selection -->
+    <div class="field" id="penisTypeField"  style="display: none;">
+            <label for="penisType">Penis Type</label>
+            <select id="penisType" onchange="updatePenisType()">
+                <option value="Standard">Standard</option>
+                <option value="knotted">Knotted</option>
+                <option value="feline">Feline</option>
+                <option value="Equine">Equine</option>
+                <option value="Ridged knotted">Draconic</option>
+                <option value="equine + knotted">Equine + Knotted</option>
+                <option value="feline + knotted">Feline + Knotted</option>
+            </select>
+    </div>
+
+    <!-- Testicle Size Selection -->
+    <div class="field">
+            <label for="testicleSize">Testicle Size</label>
+            <select id="testicleSize">
+                <option value="N/A">N/A</option>
+                <option value="tiny">Tiny</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="big">Big</option>
+                <option value="large">Large</option>
+                <option value="huge">Huge</option>
+                <option value="gigantic">Gigantic</option>
+                <option value="hyper-sized">Hyper-Sized</option>
+            </select>
+    </div>
+
+    <!-- Vagina Details -->
+    <div class="field" onchange="updateVaginaDetails()">
+            <label for="vaginaDetails">Vagina Details</label>
+            <select id="vaginaDetails">
+                <option value="N/A">N/A</option>
+                <option value="Standard">Standard</option>
+                <option value="wet">Wet</option>
+                <option value="dripping">Dripping</option>
+                <option value="pouring">Pouring</option>
+                <option value="bulging lips">Bulging Lips</option>
+                <option value="large clitoris">Large Clitoris</option>
+            </select>
+    </div>
+
+    <!-- Location Input -->
+    <div class="field">
+            <label for="location">Location</label>
+            <input type="text" id="location" placeholder="e.g., bedroom at night">
+    </div>
+
+    <!-- Background Input -->
+    <div class="field">
+            <label for="background">Background</label>
+            <input type="text" id="background" placeholder="e.g., soft bokeh effect">
+    </div>
+    <!-- Extra Details Input -->
+    <div class="field">
+            <label for="extraDetails">Additional Details</label>
+            <input type="text" id="extraDetails" placeholder="e.g., amazing quality, soft glow around eyes">
+    </div>
+</form>        
+    <div class="button-container">
         <button type="button" id="createTags" onclick="qualityTags()">Add Quality Tags</button>
-        </div>
+        <button type="button" id="createNudityTags" onclick="nudityTags()">Add Nudity Tags</button>
+    </div>
 
+    <div class="button">
         <button type="button" onclick="generatePrompt()">Generate Prompt</button>
-    </form>
-
+    </div>
+</div>
     <div class="output" id="output" style="display: none;">
-        <h2>Your Generated Prompt:</h2>
+        <h2>Generated Prompt:</h2>
         <button type="button" onclick="copyToClipboard()">Copy to Clipboard</button>
         <p id="generatedPrompt"></p>
         <a href="#" id="downloadLink" download="generatedPrompt.txt">Download Prompt</a>
     </div>
-</div>
+
 
 <script>
     function updatePenisSize() {
@@ -325,16 +349,6 @@
             console.log('Vagina chosen is neither N/A or Standard')
         }
     }
-    // Define nippleType etc...
-    function updateNippleType() {
-        const nippleType = document.getElementById('nippleType');
-
-        if (nippleType === "N/A") {
-            nippleType = nippleType;
-        } else {
-            nippleType = nippleType;
-        }
-    }
     function updateTesticleSize() {
         const testicleSize = document.getElementById('testicleSize').value;
         const testicleType = document.getElementById('testicleSize')
@@ -359,12 +373,15 @@
     function updateBreastSize() {
         let breastSize = document.getElementById('breastSize').value;
         let breastTypeField = document.getElementById('breastTypeField');
+        let nippleTypeField = document.getElementById('nippleTypeField');
 
          if (breastSize === "N/A") {
             console.log('No breast size chosen, breast type and nipple type hidden.')
             breastTypeField.style.display = "none";
+            nippleTypeField.style.display = "none";
          } else {
             breastTypeField.style.display = "block";
+            nippleTypeField.style.display = "block";
     }
     }
     // Function to check breastSize, if Standard, redundant, otherwise will log in prompt.
@@ -390,11 +407,17 @@
         charAgeCheck = "true"; 
         }
     }
-    let FocusTags = ''; // Define it globally
-    let focusTagsCheck = "false";
+    let FocusTags = '';
+    let focusTagsCheck = 'false';
 function qualityTags() {
-    FocusTags = 'Soft bokeh effect, Amazing quality, Sharp focus, Focus on character, Bright lighting, Warm lighting,';
+    FocusTags = 'soft bokeh effect, amazing quality, sharp focus, focus on character, bright lighting, solo, ';
     console.log("Quality tags added");
+}
+    let NudityTags = '';
+    let nudityTagsCheck = 'false';
+function nudityTags() {
+    NudityTags = 'nude, nsfw, naked, ';
+    console.log('Nudity chosen, character/s will be nude');
 }
 
     function generatePrompt() {
@@ -420,19 +443,19 @@ function qualityTags() {
         const extraDetails = document.getElementById('extraDetails').value;
 
         // Generate Gender and Species
-        if (gender === "Intersex") prompt += `Intersex, `;
+        if (gender === "Intersex") prompt += `intersex, `;
         if (gender === "Female") prompt += `1girl, `;
         if (gender === "Male") prompt += `1boy, `;
-        if (gender === "Non-Binary") prompt += `Non-Binary, `;
+        if (gender === "Non-Binary") prompt += `non-Binary, `;
         
         // Generate species
-        if (species) prompt += `Species:${species}, `;
+        if (species) prompt += `species:${species}, `;
 
         // Vagina options, either none, Normal, or adjective added to prompt.
         if (vaginaChoiceCheck === "false") {
             console.log("No vagina chosen.");
         } else if (vaginaChoiceCheck === "Standard") {
-            prompt += `Vagina, `;
+            prompt += `vagina, `;
         } else if (vaginaChoiceCheck === "true") {
             console.log("Vagina chosen, character will have vagina.");
             prompt += `${vaginaDetails} vagina, `;
@@ -447,13 +470,13 @@ function qualityTags() {
         } else if (penisSize === "N/A") {
           console.log('No penisSize, failsafe will remove penis type from prompt.')
         } else {
-            prompt += ` ${penisType} penis, `;
+            prompt += `${penisType} penis, `;
         }
         
         // Character will/Not have penis dependency
         if (penisSize === "N/A") {
             console.log("No penis size chosen, character will not have a penis."); 
-        } else { prompt += ` ${penisSize} penis,`;
+        } else { prompt += `${penisSize} penis,`;
             console.log("Penis size chosen, character will have a penis.");
         }
         // Dependency to check if Testicles will be added to prompt
@@ -461,13 +484,13 @@ function qualityTags() {
             console.log("No testicle size chosen, testicles will not added to prompt.");
         } else {
             console.log("Testicles added to prompt, testicle size chosen.");
-            prompt += ` ${testicleSize} testicles, `;
+            prompt += `${testicleSize} testicles, `;
         } 
         // Character will/Not have breasts dependency
         if (breastSize === "N/A") {
             console.log("No breast size chosen, character will not have breasts.");
         } else { 
-            prompt += ` ${breastSize} breasts, `;
+            prompt += `${breastSize} breasts, `;
         }
         // Breast type dependency
         if (breastType === "Standard") {
@@ -475,51 +498,52 @@ function qualityTags() {
         } else if (breastSize === "N/A") {
             console.log("No breast size chosen, failsafe will remove type from prompt.")
         } else {
-             prompt += ` ${breastType} breasts, `;
+             prompt += `${breastType} breasts, `;
             }
         // Nipple type dependency
         if (nippleType === "N/A") {
             console.log("No nipple type chosen, won't be added to prompt.");   
          } else if (nippleType === "Standard") {
-            prompt += ` Nipples, `;
+            prompt += ` nipples, `;
             console.log("nipple type chosen, ")
         } else {
             prompt += ` ${nippleType} nipples, `;
         }
     
         // Generate Appearance
-        if (hairInfo) prompt += ` Hair:${hairInfo} hair, `;
-        if (eyeInfo) prompt += ` Eyes:${eyeInfo} eyes, `;
-        if (charAge === "20s") {
-            prompt += `Age:${charAge}, `;
-        } else if (charAge === "30s") {
-            prompt += `Age:${charAge}, `;
-        } else if (charAge === "40s") {
-            prompt += `Age:${charAge}, `;
-        } else if (charAge === "50s") {
-            prompt += `Age:${charAge}, `;
-        } else if (charAge === "60s") {
-            prompt += `Age:${charAge}, `;
-        } else if (charAge === "70s") {
-            prompt += `Age:${charAge}, `;
-        } else if (charAge === "80s") {
-            prompt += `Age:${charAge}, `;
-        } else if (charAge === "90s") {
-            prompt += `Age:${charAge}, `
+        if (hairInfo) prompt += `${hairInfo}, `;
+        if (eyeInfo) prompt += `${eyeInfo}, `;
+        if (charAge === "20") {
+            prompt += `in their 20s, `;
+        } else if (charAge === "30") {
+            prompt += `in their 30s, `;
+        } else if (charAge === "40") {
+            prompt += `in their 40s, `;
+        } else if (charAge === "50") {
+            prompt += `in their 50s, `;
+        } else if (charAge === "60") {
+            prompt += `in their 60s, `;
+        } else if (charAge === "70") {
+            prompt += `in their 70s, `;
+        } else if (charAge === "80") {
+            prompt += `in their 80s, `;
+        } else if (charAge === "90") {
+            prompt += `in their 90s, `
         } else if (charAgeCheck === "true") {
             prompt += `${charAge} years old, `
         } else {
             console.log("No age chosen, age will not print into prompt.")
         }
-        if (expression) prompt += ` ${expression} expression, `;
-        if (bodyType) prompt += ` Body:${bodyType} body, `;
+        if (expression) prompt += `${expression} expression, `;
+        if (bodyType) prompt += `body:${bodyType} body, `;
 
         // Generate Clothing, Location, Background, Additional details and possible focus tags
         if (clothingDescription) prompt += ` ${clothingDescription}, `;
-        if (location) prompt += ` Location:${location}, `;
-        if (background) prompt += ` Background:${background}, `;
-        if (extraDetails) prompt += ` ${extraDetails}, `;
-        if (FocusTags) prompt += ` ${FocusTags}, `;
+        if (location) prompt += `location:${location}, `;
+        if (background) prompt += `background:${background}, `;
+        if (extraDetails) prompt += `${extraDetails}, `;
+        if (FocusTags) prompt += ` ${FocusTags}`;
+        if (NudityTags) prompt += `${NudityTags}`;
 
         // Display the generated prompt
         const output = document.getElementById('output');
