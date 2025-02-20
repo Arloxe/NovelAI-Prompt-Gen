@@ -74,12 +74,29 @@
         button:hover {
             background-color: #53c259;
         }
-        .button-container {
+        .field-container {
             display: flex;
             gap: 10px;
+            width:100%;
+            margin: 0 auto 10px auto;
+            padding: 8px;
+            max-width: 230px;
+            border-radius: 16px;
+            background-color: #341539;
+            text-decoration: whitesmoke;
+            color: whitesmoke;
             justify-content: center;
             border-radius: 12px;
          }
+         .field-container select {
+            width:100%;
+            margin: 0 auto 10px auto;
+            padding: 8px;
+            border-radius: 12px;
+            background-color: #424242;
+            text-decoration: whitesmoke;
+            color: whitesmoke;
+        }
         .output {
             margin-top: 20px;
             text-align: center;
@@ -103,14 +120,14 @@
 <div class="container">
     <form id="promptForm">
 
-    <h3>V0.03</h3>
+    <h3>V0.04</h3>
 
     <h1>NovelAI Prompt Generator</h1>
 
     <!-- Gender Selection -->
     <div class="field">
             <label for="gender">Gender</label>
-            <select id="gender" onchange="updateGender()">
+            <select id="gender" onchange="generatePrompt()">
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Intersex">Intersex</option>
@@ -119,19 +136,19 @@
     </div>
 
     <!-- Species Input -->
-    <div class="field">
+    <div class="field" onchange="generatePrompt()">
             <label for="species">Species</label>
             <input type="text" id="species" placeholder="e.g., Human">
     </div>
 
     <!-- Hair Information Input -->
-        <div class="field">
+        <div class="field" onchange="generatePrompt()">
             <label for="hairInfo">Hair Choices</label>
             <input type="text" id="hairInfo" placeholder="e.g., cyan hair with dark blue highlights, long hair, wavy hair, curly hair">
     </div>
 
     <!-- Eye Information Input -->
-    <div class="field">
+    <div class="field" onchange="generatePrompt()">
             <label for="eyeInfo">Eye Choices</label>
             <input type="text" id="eyeInfo" placeholder="e.g., violet eyes, large eyes, heterochromia, eyeliner, glowing">
     </div>
@@ -139,17 +156,17 @@
     <!-- Character Age Input-->
     <div class="field">
             <label for="charAge">Character Age</label>
-            <input type="text" id="charAge" onchange="updateCharacterAge()" placeholder="eg., 25 years old, 30s, 20s...">
+            <input type="text" id="charAge" onchange="updateCharacterAge() + generatePrompt()" placeholder="eg., 25 years old, 30s, 20s...">
     </div>
 
     <!-- Expression Input -->
-    <div class="field">
+    <div class="field" onchange="generatePrompt()">
             <label for="expression">Expression</label>
             <input type="text" id="expression" placeholder="e.g., Shy with subtle smile">
     </div>
         
     <!-- Clothing Details -->
-    <div class="field" id="clothesField" oninput="clothes()">
+    <div class="field" id="clothesField" oninput="clothes() + generatePrompt()">
             <label for="clothingDescription">Clothing</label>
             <input type="text" id="clothingDescription" placeholder="e.g., Black hoodie, booty shorts">
     </div>
@@ -157,7 +174,7 @@
     <!-- Breast Size Selection -->
     <div class="field" id="breastSizeField">
             <label for="breastSize">Breast Size</label>
-            <select id="breastSize" onchange="updateBreastSize()">
+            <select id="breastSize" onchange="updateBreastSize() + generatePrompt()">
                 <option value="N/A">N/A</option>
                 <option value="flat">Flat</option>
                 <option value="tiny">Tiny</option>
@@ -172,7 +189,7 @@
     </div>
 
     <!-- Breast Type Selection-->
-    <div class="field" id="breastTypeField" style="display: none;">
+    <div class="field" id="breastTypeField" style="display: none;" onchange="generatePrompt()">
             <label for="breastType">Breast Type</label>
             <select id="breastType">
                 <option value="standard">Standard</option>
@@ -184,7 +201,7 @@
     </div>
 
     <!-- Nipple Type/Size Selection-->
-    <div class="field" id="nippleTypeField" style="display: none;">
+    <div class="field" id="nippleTypeField" style="display: none;" onchange="generatePrompt()">
             <label for="nippleType">Nipple Type/Size</label>
             <select id="nippleType">
                 <option value="N/A">N/A</option>
@@ -193,16 +210,14 @@
                 <option value="puffy">Puffy</option>
                 <option value="inverted">Inverted</option>
                 <option value="large">Large</option>
-                <option value="hyper-sized">Hyper-Sized</option>
                 <option value="puffy and pierced">Puffy + Pierced</option>
                 <option value="large and pierced">Large + Pierced</option>
                 <option value="large and puffy">Large + Puffy</option>
-                <option value="hyper-sized and pierced">Hyper-sized + Pierced</option>
                 </select>
     </div>
 
     <!-- Body Type Selection -->
-    <div class="field">
+    <div class="field" onchange="generatePrompt()">
                 <label for="bodyType">Body Type</label>
                 <select id="bodyType">
                     <option value="Slim">Slim</option>
@@ -218,7 +233,7 @@
     <!-- Penis Size Selection -->
     <div class="field">
             <label for="penisSize">Penis Size</label>
-            <select id="penisSize" onchange="updatePenisSize()">
+            <select id="penisSize" onchange="updatePenisSize() + generatePrompt()">
                 <option value="N/A">N/A</option>
                 <option value="tiny">Tiny</option>
                 <option value="small">Small</option>
@@ -234,7 +249,7 @@
     <!-- Penis Type Selection -->
     <div class="field" id="penisTypeField"  style="display: none;">
             <label for="penisType">Penis Type</label>
-            <select id="penisType" onchange="updatePenisType()">
+            <select id="penisType" onchange="updatePenisType() + generatePrompt()">
                 <option value="Standard">Standard</option>
                 <option value="knotted">Knotted</option>
                 <option value="feline">Feline</option>
@@ -246,7 +261,7 @@
     </div>
 
     <!-- Testicle Size Selection -->
-    <div class="field">
+    <div class="field" onchange="generatePrompt()">
             <label for="testicleSize">Testicle Size</label>
             <select id="testicleSize">
                 <option value="N/A">N/A</option>
@@ -262,7 +277,7 @@
     </div>
 
     <!-- Vagina Details -->
-    <div class="field" onchange="updateVaginaDetails()">
+    <div class="field" onchange="updateVaginaDetails() + generatePrompt()">
             <label for="vaginaDetails">Vagina Details</label>
             <select id="vaginaDetails">
                 <option value="N/A">N/A</option>
@@ -276,31 +291,39 @@
     </div>
 
     <!-- Location Input -->
-    <div class="field">
+    <div class="field" onchange="generatePrompt()">
             <label for="location">Location</label>
-            <input type="text" id="location" placeholder="e.g., bedroom at night">
+            <input type="text" id="location" placeholder="e.g., bedroom at night, evening at the pier,">
     </div>
 
     <!-- Background Input -->
-    <div class="field">
-            <label for="background">Background Effect</label>
+    <div class="field" onchange="generatePrompt()">
+            <label for="background">Background Effects</label>
             <input type="text" id="background" placeholder="e.g., lighting effects, photo effects, additional background information">
     </div>
     <!-- Extra Details Input -->
-    <div class="field">
+    <div class="field" onchange="generatePrompt()">
             <label for="extraDetails">Additional Details</label>
             <input type="text" id="extraDetails" placeholder="e.g., amazing quality, realism, anime style, artist:ken sugimori,">
     </div>
-</form>        
-    <div class="button-container">
-        <button type="button" id="createTags" onclick="qualityTags()">Add Quality Tags</button>
-        <button type="button" id="createNudityTags" onclick="nudityTags()">Add Nudity Tags</button>
+      
+    <div class="field-container">
+        <label for="qualityTagsSelection">Quality Tags</label>
+        <select id="qualityTagsSelection" onchange="qualityTags() + generatePrompt()">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+        <label for="nudityTagsSelection">Nudity Tags</label>
+        <select id="nudityTagsSelection" onchange="nudityTags() + generatePrompt()">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
     </div>
-
+</form>
     <div class="button">
         <button type="button" onclick="generatePrompt()">Generate Prompt</button>
     </div>
-</div>
+
     <div class="output" id="output" style="display: none;">
         <h2>Generated Prompt:</h2>
         <button type="button" onclick="copyToClipboard()">Copy to Clipboard</button>
@@ -407,17 +430,30 @@
         charAgeCheck = "true"; 
         }
     }
-    let FocusTags = '';
+    let FocusTags = 'amazing quality, warm lighting, cozy athmosphere, solo, ';
     let focusTagsCheck = 'false';
 function qualityTags() {
-    FocusTags = 'soft bokeh effect, amazing quality, sharp focus, focus on character, bright lighting, solo, ';
-    console.log("Quality tags added");
+    let  qualityTags = document.getElementById("qualityTagsSelection").value;
+
+    if (qualityTags === "No") {
+        focusTagsCheck = "false";
+        console.log("Quality Tags not chosen.");
+    } else {
+        focusTagsCheck = "true";
+        console.log("Quality Tags chosen.")
+    }
 }
-    let NudityTags = '';
+    let nudeTags = 'nude, nsfw, ';
     let nudityTagsCheck = 'false';
 function nudityTags() {
-    NudityTags = 'nude, nsfw, naked, ';
-    console.log('Nudity chosen, character/s will be nude');
+    let  NudityTags = document.getElementById("nudityTagsSelection").value;
+    if (NudityTags === "No") {
+        nudityTagsCheck = "false";
+        console.log("Nudity Tags not chosen.");
+    } else {
+        nudityTagsCheck = "true";
+        console.log("Nudity Tags chosen.")
+    }
 }
 
     function generatePrompt() {
@@ -460,7 +496,7 @@ function nudityTags() {
             console.log("Vagina chosen, character will have vagina.");
             prompt += `${vaginaDetails} vagina, `;
         } else {
-            console.log("Failsafe, vagina changed, error in code.")
+            console.log("Vagina disabled from prompt.")
         }
         
         // Penis Type dependency, Standard shouldn't justify being prompted to the finished prompt.
@@ -476,7 +512,7 @@ function nudityTags() {
         // Character will/Not have penis dependency
         if (penisSize === "N/A") {
             console.log("No penis size chosen, character will not have a penis."); 
-        } else { prompt += `${penisSize} penis,`;
+        } else { prompt += `${penisSize} penis, `;
             console.log("Penis size chosen, character will have a penis.");
         }
         // Dependency to check if Testicles will be added to prompt
@@ -493,7 +529,7 @@ function nudityTags() {
             prompt += `${breastSize} breasts, `;
         }
         // Breast type dependency
-        if (breastType === "Standard") {
+        if (breastType === "standard") {
             console.log("Standard breast type chosen for character and will not be mentioned in the prompt.");
         } else if (breastSize === "N/A") {
             console.log("No breast size chosen, failsafe will remove type from prompt.")
@@ -542,8 +578,20 @@ function nudityTags() {
         if (location) prompt += `location:${location}, `;
         if (background) prompt += `background:${background}, `;
         if (extraDetails) prompt += `${extraDetails}, `;
-        if (FocusTags) prompt += ` ${FocusTags}`;
-        if (NudityTags) prompt += `${NudityTags}`;
+        // Checking if focus Tags are added or not
+        if (focusTagsCheck === "true") { 
+            prompt += ` ${FocusTags}`;
+            console.log("Focus tags added");
+        } else {
+            console.log("Focus Tags disabled.");
+        }
+        // Checking if nudity Tags are added or not
+        if (nudityTagsCheck === "true") { 
+            prompt += `${nudeTags}`;
+            console.log("Nudity tags added");
+        } else {
+            console.log("Nudity Tags disabled.");
+        }
 
         // Display the generated prompt
         const output = document.getElementById('output');
